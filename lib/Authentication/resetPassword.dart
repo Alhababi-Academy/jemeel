@@ -14,6 +14,8 @@ class resetPassword extends StatelessWidget {
   final TextEditingController _emailTextEditingController =
       TextEditingController();
 
+  resetPassword({super.key});
+
   @override
   Widget build(BuildContext context) {
     // بناء واجهة المستخدم لصفحة إعادة تعيين كلمة المرور
@@ -43,7 +45,7 @@ class resetPassword extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Column(

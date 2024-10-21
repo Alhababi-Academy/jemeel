@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jemeel/Admin/Home/AllUsers.dart';
+import 'package:jemeel/Admin/Home/UploadClothes.dart';
 import 'package:jemeel/config/config.dart';
-
+import 'package:jemeel/widgets/StartPage.dart';
 
 class AdminHomePage extends StatelessWidget {
   String? title;
@@ -13,103 +15,102 @@ class AdminHomePage extends StatelessWidget {
         Jemeel.sharedPreferences!.getString(Jemeel.name).toString();
 
     return Scaffold(
+      backgroundColor: Colors.white, // White background for a cleaner look
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           fullName,
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Jemeel.primraryColor, // Consistent app bar color
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        child: Center(
-          child: Column(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            buildAdminCard(
+              title: "Upload Clothes",
+              icon: Icons.cloud_upload,
+              onTap: () {
+                Route route = MaterialPageRoute(
+                    builder: (_) => const UploadClothesPage());
+                Navigator.push(context, route);
+              },
+            ),
+            const SizedBox(height: 20),
+            buildAdminCard(
+              title: "Orders",
+              icon: Icons.shopping_cart,
+              onTap: () {
+                // Navigate to orders page
+              },
+            ),
+            const SizedBox(height: 20),
+            buildAdminCard(
+              title: "All Users",
+              icon: Icons.people,
+              onTap: () {
+                Route route =
+                    MaterialPageRoute(builder: (_) => const AllUsersPage());
+                Navigator.push(context, route);
+              },
+            ),
+            const SizedBox(height: 20),
+            buildAdminCard(
+              title: "Feedback & Complaints",
+              icon: Icons.feedback,
+              onTap: () {
+                // Navigate to feedback and complaints page
+              },
+            ),
+            const SizedBox(height: 20),
+            buildAdminCard(
+              title: "Logout",
+              icon: Icons.logout,
+              onTap: () async {
+                await FirebaseAuth.instance.signOut().then((value) {
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const StartPage());
+                  Navigator.push(context, route);
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Reusable method to build the admin cards
+  Widget buildAdminCard({
+    required String title,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 5, // Subtle shadow for better aesthetics
+        color: Jemeel.primraryColor, // Card background color
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton.icon(
-                    onPressed: () {
-                    
-                    },
-                    icon: const Icon(Icons.pin_drop,
-                        color: Colors.white), // Set icon color to white
-                    label: const Text(
-                      'Upload Container',
-                      style: TextStyle(
-                          color: Colors.white), // Set text color to white
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Jemeel.buttonColor, // Set button background color
-                      minimumSize:
-                          const Size(300, 50), // Adjust size as per design
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Route route = MaterialPageRoute(
-                      //     builder: (_) => ViewRewardGiversPage());
-                      // Navigator.push(context, route);
-                    },
-                    icon: const Icon(Icons.card_giftcard,
-                        color: Colors.white), // Set icon color to white
-                    label: const Text(
-                      'Reward Provider',
-                      style: TextStyle(
-                          color: Colors.white), // Set text color to white
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Jemeel.buttonColor, // Set button background color
-                      minimumSize:
-                          const Size(300, 50), // Adjust size as per design
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      await FirebaseAuth.instance.signOut().then((value) {
-                        // Route route = MaterialPageRoute(
-                        //     builder: (_) => LoginOrRegister());
-                        // Navigator.pushAndRemoveUntil(
-                        //     context, route, (route) => false);
-                      });
-                    },
-                    icon: const Icon(Icons.logout,
-                        color: Colors.white), // Set icon color to white
-                    label: const Text(
-                      'Logout',
-                      style: TextStyle(
-                          color: Colors.white), // Set text color to white
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Jemeel.buttonColor, // Set button background color
-                      minimumSize:
-                          const Size(300, 50), // Adjust size as per design
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              Icon(icon, size: 30, color: Colors.white), // Icon color
+              const SizedBox(width: 15),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white, // White text for contrast
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),

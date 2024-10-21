@@ -10,8 +10,9 @@ plugins {
 
 android {
     namespace = "com.example.jemeel"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdkVersion 34  // Replace 33 with the desired compile SDK version
+
+    ndkVersion "21.3.6528147"  // You can specify the NDK version you want or remove this line if not needed
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -19,29 +20,29 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.jemeel"
+        applicationId "com.example.jemeel"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        minSdkVersion 23
+        targetSdkVersion 33  // Replace 33 with the desired target SDK version
+        versionCode 1         // Set your desired version code
+        versionName "1.0"     // Set your desired version name
     }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
     }
 }
 
 flutter {
-    source = "../.."
+    source "../.."
 }
