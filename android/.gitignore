@@ -2,6 +2,7 @@ gradle-wrapper.jar
 /.gradle
 /captures/
 /.iso/
+build/app/outputs/apk/debug/app-debug.apk
 /gradlew
 /gradlew.bat
 /local.properties
