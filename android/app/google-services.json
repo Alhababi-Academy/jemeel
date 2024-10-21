@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "758512692164",
+    "project_id": "jemeel-db2a3",
+    "storage_bucket": "jemeel-db2a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758512692164:android:4ef022d4fb25164adfd291",
+        "android_client_info": {
+          "package_name": "com.example.jemeel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0snHvH5ruEUNojnbaiOh4VOSMbd5lLP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758512692164:android:a405fd887c8ffae9dfd291",
+        "android_client_info": {
+          "package_name": "com.jemeel.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0snHvH5ruEUNojnbaiOh4VOSMbd5lLP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
