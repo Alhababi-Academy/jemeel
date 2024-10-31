@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jemeel/Admin/Home/AllUsers.dart';
-import 'package:jemeel/Admin/Home/UploadClothes.dart';
+import 'package:jemeel/Admin/Home/Clothes/UploadClothes.dart';
+import 'package:jemeel/Admin/Home/Clothes/UploadClothesForRent.dart';
 import 'package:jemeel/config/config.dart';
 import 'package:jemeel/widgets/StartPage.dart';
 
@@ -24,59 +25,79 @@ class AdminHomePage extends StatelessWidget {
         ),
         backgroundColor: Jemeel.primraryColor, // Consistent app bar color
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildAdminCard(
-              title: "Upload Clothes",
-              icon: Icons.cloud_upload,
-              onTap: () {
-                Route route = MaterialPageRoute(
-                    builder: (_) => const UploadClothesPage());
-                Navigator.push(context, route);
-              },
-            ),
-            const SizedBox(height: 20),
-            buildAdminCard(
-              title: "Orders",
-              icon: Icons.shopping_cart,
-              onTap: () {
-                // Navigate to orders page
-              },
-            ),
-            const SizedBox(height: 20),
-            buildAdminCard(
-              title: "All Users",
-              icon: Icons.people,
-              onTap: () {
-                Route route =
-                    MaterialPageRoute(builder: (_) => const AllUsersPage());
-                Navigator.push(context, route);
-              },
-            ),
-            const SizedBox(height: 20),
-            buildAdminCard(
-              title: "Feedback & Complaints",
-              icon: Icons.feedback,
-              onTap: () {
-                // Navigate to feedback and complaints page
-              },
-            ),
-            const SizedBox(height: 20),
-            buildAdminCard(
-              title: "Logout",
-              icon: Icons.logout,
-              onTap: () async {
-                await FirebaseAuth.instance.signOut().then((value) {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => const StartPage());
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildAdminCard(
+                title: "Upload Clothes For Sell",
+                icon: Icons.cloud_upload,
+                onTap: () {
+                  Route route = MaterialPageRoute(
+                      builder: (_) => const UploadClothesPage());
                   Navigator.push(context, route);
-                });
-              },
-            ),
-          ],
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "Upload Clothes For Rent",
+                icon: Icons.cloud_upload,
+                onTap: () {
+                  Route route = MaterialPageRoute(
+                      builder: (_) => const UploadRentalClothesPage());
+                  Navigator.push(context, route);
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "Orders",
+                icon: Icons.shopping_cart,
+                onTap: () {
+                  // Navigate to orders page
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "All Users",
+                icon: Icons.people,
+                onTap: () {
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const AllUsersPage());
+                  Navigator.push(context, route);
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "Feedback & Complaints",
+                icon: Icons.feedback,
+                onTap: () {
+                  // Navigate to feedback and complaints page
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "Chat",
+                icon: Icons.chat,
+                onTap: () {
+                  // Navigate to feedback and complaints page
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "Logout",
+                icon: Icons.logout,
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut().then((value) {
+                    Route route =
+                        MaterialPageRoute(builder: (_) => const StartPage());
+                    Navigator.push(context, route);
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -19,7 +19,7 @@ class StartPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Welcome to Jemeel!',
+                  'Welcome to CROWN!',
                   style: TextStyle(
                     fontSize: 32,
                     color: Jemeel.primraryColor,

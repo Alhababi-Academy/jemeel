@@ -6,6 +6,7 @@ import 'package:jemeel/Authentication/UserRegisterPage.dart';
 import 'package:jemeel/Authentication/resetPassword.dart';
 import 'package:jemeel/DialogBox/errorDialog.dart';
 import 'package:jemeel/DialogBox/loadingDialog.dart';
+import 'package:jemeel/Home/BottomNavPage.dart';
 import 'package:jemeel/config/config.dart';
 
 class UserLogin extends StatefulWidget {
@@ -251,7 +252,7 @@ class _UserLoginState extends State<UserLogin> {
         Route route = MaterialPageRoute(builder: (context) => AdminHomePage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);
       } else if (userType == "user") {
-        Route route = MaterialPageRoute(builder: (context) => AdminHomePage());
+        Route route = MaterialPageRoute(builder: (context) => BottomNavPage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);
       }
     }
