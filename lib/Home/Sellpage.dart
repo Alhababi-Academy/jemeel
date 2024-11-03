@@ -29,8 +29,10 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Clothes for Sell'),
+        centerTitle: true,
         backgroundColor: Jemeel.primraryColor,
       ),
+      drawer: Drawer(),
       body: StreamBuilder<QuerySnapshot>(
         stream: _fetchClothesForSell(),
         builder: (context, snapshot) {

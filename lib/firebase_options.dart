@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD0snHvH5ruEUNojnbaiOh4VOSMbd5lLP8',
-    appId: '1:758512692164:android:4ef022d4fb25164adfd291',
-    messagingSenderId: '758512692164',
-    projectId: 'jemeel-db2a3',
-    storageBucket: 'jemeel-db2a3.appspot.com',
+    apiKey: 'AIzaSyBbye86MwPm0JJpDM0hNVixcF78wPuNBK0',
+    appId: '1:355048401623:android:57d8acebfaf0ee2a439e92',
+    messagingSenderId: '355048401623',
+    projectId: 'irrigation-d2944',
+    databaseURL: 'https://irrigation-d2944-default-rtdb.firebaseio.com',
+    storageBucket: 'irrigation-d2944.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBlViuoZ3iPlsT-LPyO0MHSUr9NbpIIOT0',
-    appId: '1:758512692164:ios:cb80816019bc169cdfd291',
-    messagingSenderId: '758512692164',
-    projectId: 'jemeel-db2a3',
-    storageBucket: 'jemeel-db2a3.appspot.com',
+    apiKey: 'AIzaSyCqqe_EdKgucYtR-uIBi-OgvsMG8W1iVo4',
+    appId: '1:355048401623:ios:d81e5be730c93c39439e92',
+    messagingSenderId: '355048401623',
+    projectId: 'irrigation-d2944',
+    databaseURL: 'https://irrigation-d2944-default-rtdb.firebaseio.com',
+    storageBucket: 'irrigation-d2944.appspot.com',
     iosBundleId: 'com.example.jemeel',
   );
 }

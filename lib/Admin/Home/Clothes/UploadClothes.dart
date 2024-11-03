@@ -15,7 +15,6 @@ class UploadClothesPage extends StatefulWidget {
 class _UploadClothesPageState extends State<UploadClothesPage> {
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFiles = [];
-  final TextEditingController _sizeController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -64,7 +63,6 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
   Future<void> _uploadClothes() async {
     if (_nameController.text.isEmpty ||
         _priceController.text.isEmpty ||
-        _sizeController.text.isEmpty ||
         _imageFiles == null ||
         _imageFiles!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -88,7 +86,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
       await FirebaseFirestore.instance.collection("clothes").add({
         "name": _nameController.text,
         "brand": _brandController.text,
-        "size": _sizeController.text,
+
         "price": double.parse(_priceController.text),
         "details": _detailsController.text,
         "images": imageUrls, // Store the list of image URLs
@@ -96,7 +94,10 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Clothes uploaded successfully!"),
+        content: Text(
+          "Clothes uploaded successfully!",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
       ));
 
@@ -104,7 +105,6 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
       setState(() {
         _nameController.clear();
         _brandController.clear();
-        _sizeController.clear();
         _priceController.clear();
         _detailsController.clear();
         _imageFiles = [];
@@ -252,14 +252,6 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
               ),
               const SizedBox(height: 20),
 
-              // Size field
-              buildTextField(
-                controller: _sizeController,
-                hintText: "Enter size (e.g., S, M, L, XL)",
-                icon: Icons.straighten,
-              ),
-              const SizedBox(height: 20),
-
               // Price field
               buildTextField(
                 controller: _priceController,
@@ -295,8 +287,8 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                     ),
                   ),
                   child: isUploading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
+                      ? CircularProgressIndicator(
+                          color: Jemeel.buttonColor,
                         )
                       : const Text(
                           "Upload Clothes",

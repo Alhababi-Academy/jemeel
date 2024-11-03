@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jemeel/Home/Sellpage.dart';
 import 'package:jemeel/config/config.dart';
 
 class BottomNavPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   // Placeholder widgets for each tab
   final List<Widget> _pages = [
-    const Center(child: Text('Clothes for Sell Page Placeholder')),
+    ClothesForSellPage(),
     const Center(child: Text('Clothes for Rent Page Placeholder')),
     const Center(child: Text('Orders Page Placeholder')),
     const Center(child: Text('Profile Page Placeholder')),
