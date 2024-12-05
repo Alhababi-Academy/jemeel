@@ -25,14 +25,14 @@ class _UserLoginState extends State<UserLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Jemeel.backgroundColor,
+      backgroundColor: Crown.backgroundColor,
       appBar: AppBar(
         title: const Text(
           "Login",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Crown.primraryColor,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,7 +50,7 @@ class _UserLoginState extends State<UserLogin> {
                     Text(
                       "Email",
                       style: TextStyle(
-                        color: Jemeel.textColor,
+                        color: Crown.textColor,
                         fontSize: 17,
                       ),
                     ),
@@ -70,27 +70,27 @@ class _UserLoginState extends State<UserLogin> {
                           hintText: "example@gmail.com",
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Jemeel
+                              color: Crown
                                   .primraryColor, // Border color when focused
                               width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Jemeel.textColor.withOpacity(
+                              color: Crown.textColor.withOpacity(
                                   0.5), // Border color when not focused
                               width: 1,
                             ),
                           ),
                           prefixIcon: Icon(Icons.email,
-                              color: Jemeel.primraryColor), // Email icon color
+                              color: Crown.primraryColor), // Email icon color
                         ),
                       ),
                     ),
                     Text(
                       "Password",
                       style: TextStyle(
-                        color: Jemeel.textColor,
+                        color: Crown.textColor,
                         fontSize: 17,
                       ),
                     ),
@@ -111,20 +111,20 @@ class _UserLoginState extends State<UserLogin> {
                           hintText: "**********",
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Jemeel
+                              color: Crown
                                   .primraryColor, // Border color when focused
                               width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Jemeel.textColor.withOpacity(
+                              color: Crown.textColor.withOpacity(
                                   0.5), // Border color when not focused
                               width: 1,
                             ),
                           ),
                           prefixIcon: Icon(Icons.lock,
-                              color: Jemeel.primraryColor), // Lock icon color
+                              color: Crown.primraryColor), // Lock icon color
                         ),
                       ),
                     ),
@@ -136,7 +136,7 @@ class _UserLoginState extends State<UserLogin> {
                     loginFunction();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Jemeel.primraryColor,
+                    backgroundColor: Crown.primraryColor,
                     minimumSize: const Size(250, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -159,7 +159,7 @@ class _UserLoginState extends State<UserLogin> {
                   },
                   child: Text(
                     "Forgot Password?",
-                    style: TextStyle(color: Jemeel.primraryColor),
+                    style: TextStyle(color: Crown.primraryColor),
                   ),
                 ),
                 TextButton(
@@ -170,7 +170,7 @@ class _UserLoginState extends State<UserLogin> {
                   },
                   child: Text(
                     "No Account? Create One",
-                    style: TextStyle(color: Jemeel.primraryColor),
+                    style: TextStyle(color: Crown.primraryColor),
                   ),
                 ),
               ],
@@ -247,12 +247,13 @@ class _UserLoginState extends State<UserLogin> {
     if (results.exists) {
       String userType = results['type'];
       String fullName = results['fullName'];
-      Jemeel.sharedPreferences?.setString(Jemeel.name, fullName);
+      Crown.sharedPreferences?.setString(Crown.name, fullName);
       if (userType == "admin") {
         Route route = MaterialPageRoute(builder: (context) => AdminHomePage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);
       } else if (userType == "user") {
-        Route route = MaterialPageRoute(builder: (context) => BottomNavPage());
+        Route route =
+            MaterialPageRoute(builder: (context) => const BottomNavPage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);
       }
     }

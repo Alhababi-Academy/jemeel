@@ -22,7 +22,7 @@ class StartPage extends StatelessWidget {
                   'Welcome to CROWN!',
                   style: TextStyle(
                     fontSize: 32,
-                    color: Jemeel.primraryColor,
+                    color: Crown.primraryColor,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
@@ -34,7 +34,7 @@ class StartPage extends StatelessWidget {
                   'Shop Pre-Loved Clothes\nFind Unique Pieces!',
                   style: TextStyle(
                     fontSize: 20,
-                    color: Jemeel.secondaryColor,
+                    color: Crown.secondaryColor,
                     fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
@@ -59,7 +59,7 @@ class StartPage extends StatelessWidget {
                     Navigator.push(context, route);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Jemeel.primraryColor,
+                    backgroundColor: Crown.primraryColor,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 40, vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -88,7 +88,7 @@ class StartPage extends StatelessWidget {
                 Text(
                   "Have an account? ",
                   style: TextStyle(
-                    color: Jemeel.secondaryColor,
+                    color: Crown.secondaryColor,
                     fontSize: 16,
                   ),
                 ),
@@ -101,7 +101,7 @@ class StartPage extends StatelessWidget {
                   child: Text(
                     "Login",
                     style: TextStyle(
-                      color: Jemeel.primraryColor,
+                      color: Crown.primraryColor,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

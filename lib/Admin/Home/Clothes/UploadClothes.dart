@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:jemeel/config/config.dart';
 
 class UploadClothesPage extends StatefulWidget {
@@ -20,14 +21,14 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _brandController = TextEditingController();
   final List<dynamic> _sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  List<dynamic> selectedSizes = []; // List to store selected sizes
+  List<dynamic> selectedSizes = [];
   bool isUploading = false;
 
   // Method to pick multiple images
   Future<void> _pickImages() async {
     try {
       final pickedFiles = await _picker.pickMultiImage();
-      if (pickedFiles != null && pickedFiles.isNotEmpty) {
+      if (pickedFiles.isNotEmpty) {
         setState(() {
           _imageFiles = pickedFiles;
         });
@@ -51,8 +52,9 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
       downloadUrls.add(downloadUrl);
     }
     return downloadUrls;
-  } // Method to remove a selected image
+  }
 
+  // Method to remove a selected image
   void _removeImage(int index) {
     setState(() {
       _imageFiles!.removeAt(index);
@@ -64,10 +66,11 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
     if (_nameController.text.isEmpty ||
         _priceController.text.isEmpty ||
         _imageFiles == null ||
-        _imageFiles!.isEmpty) {
+        _imageFiles!.isEmpty ||
+        selectedSizes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
-          "Please complete all required fields and select images.",
+          "Please complete all required fields, select images, and sizes.",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
@@ -81,16 +84,17 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
 
     try {
       List<String> imageUrls = await _uploadImages(_imageFiles!);
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('MMMM d, yyyy h:mm a').format(now);
 
-      // Create a new document in the "clothes" collection with the entered data
       await FirebaseFirestore.instance.collection("clothes").add({
         "name": _nameController.text,
         "brand": _brandController.text,
-
         "price": double.parse(_priceController.text),
         "details": _detailsController.text,
-        "images": imageUrls, // Store the list of image URLs
-        "uploadTime": DateTime.now(), // Store the current date and time
+        "images": imageUrls,
+        "sizes": selectedSizes,
+        "uploadTime": formattedDate,
       });
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -101,13 +105,13 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
         backgroundColor: Colors.green,
       ));
 
-      // Clear the form and images after successful upload
       setState(() {
         _nameController.clear();
         _brandController.clear();
         _priceController.clear();
         _detailsController.clear();
         _imageFiles = [];
+        selectedSizes = [];
         isUploading = false;
       });
     } catch (e) {
@@ -127,7 +131,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Crown.primraryColor,
         title: const Text(
           'Upload Clothes',
           style: TextStyle(color: Colors.white),
@@ -140,11 +144,10 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image picker section
               Text(
                 "Images",
                 style: TextStyle(
-                  color: Jemeel.textColor,
+                  color: Crown.textColor,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -155,20 +158,19 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                 child: Container(
                   height: 150,
                   decoration: BoxDecoration(
-                    color: Jemeel.primraryColor.withOpacity(0.1),
+                    color: Crown.primraryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Jemeel.primraryColor),
+                    border: Border.all(color: Crown.primraryColor),
                   ),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.image,
-                            color: Jemeel.primraryColor, size: 40),
+                        Icon(Icons.image, color: Crown.primraryColor, size: 40),
                         const SizedBox(height: 5),
                         Text(
                           "Pick Multiple Images",
-                          style: TextStyle(color: Jemeel.primraryColor),
+                          style: TextStyle(color: Crown.primraryColor),
                         ),
                       ],
                     ),
@@ -226,7 +228,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                             : selectedSizes.remove(size);
                       });
                     },
-                    selectedColor: Jemeel.primraryColor,
+                    selectedColor: Crown.primraryColor,
                     backgroundColor: Colors.grey.shade200,
                     labelStyle: TextStyle(
                       color: selectedSizes.contains(size)
@@ -236,23 +238,18 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                   );
                 }).toList(),
               ),
-              // Name field
               buildTextField(
                 controller: _nameController,
                 hintText: "Enter name of the clothing",
                 icon: Icons.edit,
               ),
               const SizedBox(height: 20),
-
-              // Brand field
               buildTextField(
                 controller: _brandController,
                 hintText: "Enter brand (optional)",
                 icon: Icons.branding_watermark,
               ),
               const SizedBox(height: 20),
-
-              // Price field
               buildTextField(
                 controller: _priceController,
                 hintText: "Enter price",
@@ -260,8 +257,6 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 20),
-
-              // Details field
               buildTextField(
                 controller: _detailsController,
                 hintText: "Enter additional details",
@@ -269,17 +264,11 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                 maxLines: 3,
               ),
               const SizedBox(height: 30),
-
-              // Upload button
               Center(
                 child: ElevatedButton(
-                  onPressed: isUploading
-                      ? null
-                      : () {
-                          _uploadClothes();
-                        },
+                  onPressed: isUploading ? null : _uploadClothes,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Jemeel.buttonColor,
+                    backgroundColor: Crown.buttonColor,
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 50),
                     shape: RoundedRectangleBorder(
@@ -288,7 +277,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                   ),
                   child: isUploading
                       ? CircularProgressIndicator(
-                          color: Jemeel.buttonColor,
+                          color: Crown.buttonColor,
                         )
                       : const Text(
                           "Upload Clothes",
@@ -307,7 +296,6 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
     );
   }
 
-  // Reusable method to build a text field with consistent styling
   Widget buildTextField({
     required TextEditingController controller,
     required String hintText,
@@ -324,13 +312,13 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
-        prefixIcon: Icon(icon, color: Jemeel.primraryColor),
+        prefixIcon: Icon(icon, color: Crown.primraryColor),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Jemeel.primraryColor, width: 1),
+          borderSide: BorderSide(color: Crown.primraryColor, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(color: Jemeel.textColor.withOpacity(0.5), width: 1),
+              BorderSide(color: Crown.textColor.withOpacity(0.5), width: 1),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

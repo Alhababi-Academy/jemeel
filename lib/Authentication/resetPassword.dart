@@ -53,7 +53,7 @@ class resetPassword extends StatelessWidget {
                       Text(
                         "Reset Password", // نص التعليمات
                         style: TextStyle(
-                            color: Jemeel.buttonColor,
+                            color: Crown.buttonColor,
                             fontSize: 27,
                             fontWeight: FontWeight.bold), // تخصيص النص
                       ),
@@ -88,7 +88,7 @@ class resetPassword extends StatelessWidget {
                                   ),
                                   prefixIcon: Icon(
                                     Icons.email, // أيقونة البريد الإلكتروني
-                                    color: Jemeel.buttonColor, // لون الأيقونة
+                                    color: Crown.buttonColor, // لون الأيقونة
                                   ),
                                 ),
                               ),
@@ -103,7 +103,7 @@ class resetPassword extends StatelessWidget {
                               context); // فحص إذا كان حقل البريد الإلكتروني فارغًا
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Jemeel.buttonColor,
+                          backgroundColor: Crown.buttonColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),

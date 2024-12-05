@@ -42,6 +42,11 @@ dependencies:
   cloud_firestore: ^5.4.4
   shared_preferences: ^2.3.2
   firebase_storage: ^12.3.3
+  flutter_rating_stars: ^1.1.0
+  intl: ^0.19.0
+  syncfusion_flutter_datepicker: ^27.2.5
+  geolocator: ^9.0.2
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:

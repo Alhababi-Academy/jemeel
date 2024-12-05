@@ -30,7 +30,7 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
   Future<void> _pickImages() async {
     try {
       final pickedFiles = await _picker.pickMultiImage();
-      if (pickedFiles != null && pickedFiles.isNotEmpty) {
+      if (pickedFiles.isNotEmpty) {
         setState(() {
           _imageFiles = pickedFiles;
         });
@@ -129,7 +129,7 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Crown.primraryColor,
         title: const Text(
           'Upload Clothes for Rent',
           style: TextStyle(color: Colors.white),
@@ -144,7 +144,7 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
             children: [
               Text("Images",
                   style: TextStyle(
-                      color: Jemeel.textColor,
+                      color: Crown.textColor,
                       fontSize: 16,
                       fontWeight: FontWeight.bold)),
               const SizedBox(height: 10),
@@ -153,19 +153,18 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
                 child: Container(
                   height: 150,
                   decoration: BoxDecoration(
-                    color: Jemeel.primraryColor.withOpacity(0.1),
+                    color: Crown.primraryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Jemeel.primraryColor),
+                    border: Border.all(color: Crown.primraryColor),
                   ),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.image,
-                            color: Jemeel.primraryColor, size: 40),
+                        Icon(Icons.image, color: Crown.primraryColor, size: 40),
                         const SizedBox(height: 5),
                         Text("Pick Multiple Images",
-                            style: TextStyle(color: Jemeel.primraryColor)),
+                            style: TextStyle(color: Crown.primraryColor)),
                       ],
                     ),
                   ),
@@ -220,7 +219,7 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
                             : selectedSizes.remove(size);
                       });
                     },
-                    selectedColor: Jemeel.primraryColor,
+                    selectedColor: Crown.primraryColor,
                     backgroundColor: Colors.grey.shade200,
                     labelStyle: TextStyle(
                       color: selectedSizes.contains(size)
@@ -266,7 +265,7 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
                 child: ElevatedButton(
                   onPressed: isUploading ? null : () => _uploadRentalClothes(),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Jemeel.buttonColor,
+                    backgroundColor: Crown.buttonColor,
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 50),
                     shape: RoundedRectangleBorder(
@@ -304,12 +303,12 @@ class _UploadRentalClothesPageState extends State<UploadRentalClothesPage> {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
-        prefixIcon: Icon(icon, color: Jemeel.primraryColor),
+        prefixIcon: Icon(icon, color: Crown.primraryColor),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Jemeel.primraryColor, width: 1)),
+            borderSide: BorderSide(color: Crown.primraryColor, width: 1)),
         enabledBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: Jemeel.textColor.withOpacity(0.5), width: 1)),
+                BorderSide(color: Crown.textColor.withOpacity(0.5), width: 1)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );

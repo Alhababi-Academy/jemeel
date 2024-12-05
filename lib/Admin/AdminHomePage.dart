@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:jemeel/Admin/Home/AllUsers.dart';
 import 'package:jemeel/Admin/Home/Clothes/UploadClothes.dart';
 import 'package:jemeel/Admin/Home/Clothes/UploadClothesForRent.dart';
+import 'package:jemeel/Admin/Home/Drivers/addDriver.dart';
+import 'package:jemeel/Admin/Home/Drivers/allDrivers.dart';
+import 'package:jemeel/Admin/Home/orders.dart';
 import 'package:jemeel/config/config.dart';
 import 'package:jemeel/widgets/StartPage.dart';
 
@@ -12,8 +15,7 @@ class AdminHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String fullName =
-        Jemeel.sharedPreferences!.getString(Jemeel.name).toString();
+    String fullName = Crown.sharedPreferences!.getString(Crown.name).toString();
 
     return Scaffold(
       backgroundColor: Colors.white, // White background for a cleaner look
@@ -23,7 +25,7 @@ class AdminHomePage extends StatelessWidget {
           fullName,
           style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Jemeel.primraryColor, // Consistent app bar color
+        backgroundColor: Crown.primraryColor, // Consistent app bar color
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -55,7 +57,9 @@ class AdminHomePage extends StatelessWidget {
                 title: "Orders",
                 icon: Icons.shopping_cart,
                 onTap: () {
-                  // Navigate to orders page
+                  Route route = MaterialPageRoute(
+                      builder: (_) => const AdminOrdersPage());
+                  Navigator.push(context, route);
                 },
               ),
               const SizedBox(height: 10),
@@ -70,10 +74,22 @@ class AdminHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               buildAdminCard(
-                title: "Feedback & Complaints",
-                icon: Icons.feedback,
+                title: "All Users",
+                icon: Icons.people,
                 onTap: () {
-                  // Navigate to feedback and complaints page
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const AllUsersPage());
+                  Navigator.push(context, route);
+                },
+              ),
+              const SizedBox(height: 10),
+              buildAdminCard(
+                title: "All Drivers",
+                icon: Icons.delivery_dining,
+                onTap: () {
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const AllDriversPage());
+                  Navigator.push(context, route);
                 },
               ),
               const SizedBox(height: 10),
@@ -116,7 +132,7 @@ class AdminHomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         elevation: 5, // Subtle shadow for better aesthetics
-        color: Jemeel.primraryColor, // Card background color
+        color: Crown.primraryColor, // Card background color
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
           child: Row(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jemeel/Home/Sellpage.dart';
+import 'package:jemeel/Authentication/EditProfile.dart';
+import 'package:jemeel/Home/RentClothes/RentPage.dart';
+import 'package:jemeel/Home/SellingClothes/Sellpage.dart';
+import 'package:jemeel/Orders/OrdersPage.dart';
 import 'package:jemeel/config/config.dart';
 
 class BottomNavPage extends StatefulWidget {
@@ -14,10 +17,10 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   // Placeholder widgets for each tab
   final List<Widget> _pages = [
-    ClothesForSellPage(),
-    const Center(child: Text('Clothes for Rent Page Placeholder')),
-    const Center(child: Text('Orders Page Placeholder')),
-    const Center(child: Text('Profile Page Placeholder')),
+    const ClothesForSellPage(),
+    const RentPage(),
+    const OrdersPage(),
+    const EditProfilePage(),
   ];
 
   @override
@@ -31,7 +34,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Jemeel.primraryColor,
+        selectedItemColor: Crown.primraryColor,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,

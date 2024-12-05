@@ -44,7 +44,7 @@ class ErrorAlertDialog extends StatelessWidget {
               "OK",
               style: TextStyle(
                 fontSize: 16, // Font size of the text
-                color: Jemeel.primraryColor, // Color of the text
+                color: Crown.primraryColor, // Color of the text
               ),
             ),
           ),

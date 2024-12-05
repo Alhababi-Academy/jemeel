@@ -32,7 +32,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white, // Clean white background
       appBar: AppBar(
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Crown.primraryColor,
         title: const Text(
           'Create Account',
           style: TextStyle(color: Colors.white),
@@ -106,7 +106,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     registerNewUser();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Jemeel.primraryColor,
+                    backgroundColor: Crown.primraryColor,
                     minimumSize: const Size(250, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -150,17 +150,17 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: Jemeel.primraryColor, // Border color when focused
+            color: Crown.primraryColor, // Border color when focused
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: Jemeel.secondaryColor
+            color: Crown.secondaryColor
                 .withOpacity(0.5), // Border color when not focused
           ),
         ),
-        prefixIcon: Icon(icon, color: Jemeel.primraryColor), // Icon color
+        prefixIcon: Icon(icon, color: Crown.primraryColor), // Icon color
       ),
     );
   }

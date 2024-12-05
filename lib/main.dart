@@ -1,7 +1,5 @@
 // استيراد مكتبة Cloud Firestore من Firebase للتعامل مع قاعدة البيانات
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jemeel/config/config.dart';
-// استيراد صفحة StartPage من المجلد Authentication
 // استيراد الإعدادات من مجلد config
 import 'package:firebase_auth/firebase_auth.dart';
 // استيراد مكتبة Firebase Core لتهيئة التطبيق مع Firebase
@@ -10,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 // استيراد مكتبة Flutter لبناء الواجهة الرسومية
 import 'package:flutter/material.dart';
+import 'package:jemeel/config/config.dart';
 import 'package:jemeel/firebase_options.dart';
 import 'package:jemeel/widgets/StartPage.dart';
 // استيراد مكتبة SharedPreferences للتعامل مع تفضيلات المستخدم المحلية
@@ -25,17 +24,17 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Jemeel.sharedPreferences = await SharedPreferences.getInstance();
+  Crown.sharedPreferences = await SharedPreferences.getInstance();
   // جلب تفضيلات المستخدم
 
   // تعيين مكونات Firebase للتطبيق kkue
-  Jemeel.firebaseFirestore = FirebaseFirestore.instance;
+  Crown.firebaseFirestore = FirebaseFirestore.instance;
   // قاعدة بيانات Firestore
 
-  Jemeel.firebaseStorage = FirebaseStorage.instance;
+  Crown.firebaseStorage = FirebaseStorage.instance;
   // وحدة تخزين Firebase
 
-  Jemeel.firebaseAuth = FirebaseAuth.instance;
+  Crown.firebaseAuth = FirebaseAuth.instance;
   // مصادقة المستخدمين
 
   runApp(const MyApp());

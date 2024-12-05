@@ -15,7 +15,7 @@ class _AllUsersPageState extends State<AllUsersPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Jemeel.primraryColor,
+        backgroundColor: Crown.primraryColor,
         title: const Text(
           'All Users',
           style: TextStyle(color: Colors.white),
@@ -56,7 +56,7 @@ class _AllUsersPageState extends State<AllUsersPage> {
                   ),
                   subtitle: Text(user['email'] ?? 'No Email'),
                   trailing: IconButton(
-                    icon: Icon(Icons.info, color: Jemeel.primraryColor),
+                    icon: Icon(Icons.info, color: Crown.primraryColor),
                     onPressed: () {
                       _viewMoreDetails(context, user);
                     },
@@ -115,7 +115,7 @@ class _AllUsersPageState extends State<AllUsersPage> {
               },
               child: Text(
                 "Close",
-                style: TextStyle(color: Jemeel.primraryColor),
+                style: TextStyle(color: Crown.primraryColor),
               ),
             ),
           ],

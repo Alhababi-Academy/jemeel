@@ -29,7 +29,7 @@ class LoadingAlertDialog extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation(
-                Jemeel.primraryColor,
+                Crown.primraryColor,
               ),
             ),
           ),
