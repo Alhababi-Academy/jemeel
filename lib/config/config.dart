@@ -32,5 +32,5 @@ class Crown {
   static String name = "";
 
   // Add your Firebase API key here
-  static String apiKey = "AIzaSyBd4rovDi-0FHxKTiZ2sXu2UVZXwOqlSok";
+  static String apiKey = "AIzaSyBpLzaDvyWfvVvxD9xO3fM1i5FfCbjJ9nE";
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jemeel/Home/About.dart';
 import 'package:jemeel/Home/Addresses/addAddress.dart';
+import 'package:jemeel/Home/chats/AllChats.dart';
 import 'package:jemeel/config/config.dart';
 import 'package:jemeel/widgets/StartPage.dart';
 
@@ -58,6 +59,14 @@ class UserDrawer extends StatelessWidget {
             onTap: () {
               Route route =
                   MaterialPageRoute(builder: (_) => const ManageAddressPage());
+              Navigator.push(context, route);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.chat),
+            title: const Text('All Chats'),
+            onTap: () {
+              Route route = MaterialPageRoute(builder: (_) => const AllChats());
               Navigator.push(context, route);
             },
           ),

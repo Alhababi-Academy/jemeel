@@ -1,54 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.jemeel.app-mergeDebugResources-29:/values-b+sr+Latn/values-b+sr+Latn.xml",
+            "outputFile": "com.example.jemeel.app-mergeDebugResources-37:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\5f6cdc823fada7b29d0c10aebbe8aafd\\transformed\\browser-1.4.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,166,266,379",
-                        "endColumns": "110,99,112,97",
-                        "endOffsets": "161,261,374,472"
-                    },
-                    "to": {
-                        "startLines": "29,30,31,32",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3187,3298,3398,3511",
-                        "endColumns": "110,99,112,97",
-                        "endOffsets": "3293,3393,3506,3604"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\f4fa99e6dc08b2166790fcaac79eb216\\transformed\\core-1.13.1\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,255,352,456,560,665,781",
-                        "endColumns": "97,101,96,103,103,104,115,100",
-                        "endOffsets": "148,250,347,451,555,660,776,877"
-                    },
-                    "to": {
-                        "startLines": "4,5,6,7,8,9,10,33",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "286,384,486,583,687,791,896,3609",
-                        "endColumns": "97,101,96,103,103,104,115,100",
-                        "endOffsets": "379,481,578,682,786,891,1007,3705"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\0b8c47194ae6ef1c2a679876db233c19\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,166",
-                        "endColumns": "110,119",
-                        "endOffsets": "161,281"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\5d270303d9ec4f0b4accfed855ee2d77\\transformed\\jetified-play-services-basement-18.3.0\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\ab921d2504dc4ffdb3a2cd4464883cfe\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -65,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\71955194b3c76c341d30e99461e45d5c\\transformed\\jetified-play-services-base-18.3.0\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\b2884dbf4ee3398b2907745768baeed2\\transformed\\core-1.13.1\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,352,456,560,665,781",
+                        "endColumns": "97,101,96,103,103,104,115,100",
+                        "endOffsets": "148,250,347,451,555,660,776,877"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7,8,9,10,33",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "286,384,486,583,687,791,896,3609",
+                        "endColumns": "97,101,96,103,103,104,115,100",
+                        "endOffsets": "379,481,578,682,786,891,1007,3705"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\f02f3cca9170ce7f73792140510cdd35\\transformed\\jetified-play-services-base-18.3.0\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -79,6 +52,33 @@
                         "startOffsets": "1012,1119,1277,1404,1514,1668,1795,1907,2139,2288,2395,2555,2682,2831,2974,3042,3107",
                         "endColumns": "106,157,126,109,153,126,111,101,148,106,159,126,148,142,67,64,79",
                         "endOffsets": "1114,1272,1399,1509,1663,1790,1902,2004,2283,2390,2550,2677,2826,2969,3037,3102,3182"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\ff2b779d4ecf08070f3e2c7f20fd7758\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,166",
+                        "endColumns": "110,119",
+                        "endOffsets": "161,281"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zeyad\\.gradle\\caches\\transforms-3\\5817c6ab20461ca34d4a9e51e2c64148\\transformed\\browser-1.8.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,166,266,379",
+                        "endColumns": "110,99,112,97",
+                        "endOffsets": "161,261,374,472"
+                    },
+                    "to": {
+                        "startLines": "29,30,31,32",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3187,3298,3398,3511",
+                        "endColumns": "110,99,112,97",
+                        "endOffsets": "3293,3393,3506,3604"
                     }
                 }
             ]

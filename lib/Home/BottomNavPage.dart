@@ -3,6 +3,7 @@ import 'package:jemeel/Authentication/EditProfile.dart';
 import 'package:jemeel/Home/RentClothes/RentPage.dart';
 import 'package:jemeel/Home/SellingClothes/Sellpage.dart';
 import 'package:jemeel/Orders/OrdersPage.dart';
+import 'package:jemeel/Orders/RentPageOrders.dart';
 import 'package:jemeel/config/config.dart';
 
 class BottomNavPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
     const ClothesForSellPage(),
     const RentPage(),
     const OrdersPage(),
+    const RentalOrdersPage(),
     const EditProfilePage(),
   ];
 
@@ -50,6 +52,10 @@ class _BottomNavPageState extends State<BottomNavPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt),
             label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Rent',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

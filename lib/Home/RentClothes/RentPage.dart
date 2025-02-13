@@ -97,7 +97,7 @@ class _RentPageState extends State<RentPage> {
               ),
               const SizedBox(height: 5),
               Text(
-                '\$${productData['price']?.toStringAsFixed(2) ?? 'N/A'} / day',
+                '\$${productData['rentalPrice']?.toStringAsFixed(2) ?? 'N/A'} / day',
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 5),

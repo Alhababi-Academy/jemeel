@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jemeel/Admin/AdminChats.dart';
 import 'package:jemeel/Admin/Home/AllUsers.dart';
-import 'package:jemeel/Admin/Home/Clothes/UploadClothes.dart';
-import 'package:jemeel/Admin/Home/Clothes/UploadClothesForRent.dart';
-import 'package:jemeel/Admin/Home/Drivers/addDriver.dart';
+import 'package:jemeel/Admin/Home/Clothes/RentalClothes/AllRentalClothesPage.dart';
+import 'package:jemeel/Admin/Home/Clothes/UploadClothes/AllClothes.dart';
 import 'package:jemeel/Admin/Home/Drivers/allDrivers.dart';
 import 'package:jemeel/Admin/Home/orders.dart';
 import 'package:jemeel/config/config.dart';
@@ -37,8 +37,8 @@ class AdminHomePage extends StatelessWidget {
                 title: "Upload Clothes For Sell",
                 icon: Icons.cloud_upload,
                 onTap: () {
-                  Route route = MaterialPageRoute(
-                      builder: (_) => const UploadClothesPage());
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const AllClothesPage());
                   Navigator.push(context, route);
                 },
               ),
@@ -48,7 +48,7 @@ class AdminHomePage extends StatelessWidget {
                 icon: Icons.cloud_upload,
                 onTap: () {
                   Route route = MaterialPageRoute(
-                      builder: (_) => const UploadRentalClothesPage());
+                      builder: (_) => const AllRentalClothesPage());
                   Navigator.push(context, route);
                 },
               ),
@@ -59,16 +59,6 @@ class AdminHomePage extends StatelessWidget {
                 onTap: () {
                   Route route = MaterialPageRoute(
                       builder: (_) => const AdminOrdersPage());
-                  Navigator.push(context, route);
-                },
-              ),
-              const SizedBox(height: 10),
-              buildAdminCard(
-                title: "All Users",
-                icon: Icons.people,
-                onTap: () {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => const AllUsersPage());
                   Navigator.push(context, route);
                 },
               ),
@@ -97,7 +87,9 @@ class AdminHomePage extends StatelessWidget {
                 title: "Chat",
                 icon: Icons.chat,
                 onTap: () {
-                  // Navigate to feedback and complaints page
+                  Route route =
+                      MaterialPageRoute(builder: (_) => const AdminChatsPage());
+                  Navigator.push(context, route);
                 },
               ),
               const SizedBox(height: 10),

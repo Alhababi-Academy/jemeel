@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:jemeel/Admin/AdminHomePage.dart';
 import 'package:jemeel/Authentication/UserRegisterPage.dart';
 import 'package:jemeel/Authentication/resetPassword.dart';
+import 'package:jemeel/Delivery/Home/HomePage.dart';
+import 'package:jemeel/Delivery/register.dart';
 import 'package:jemeel/DialogBox/errorDialog.dart';
 import 'package:jemeel/DialogBox/loadingDialog.dart';
 import 'package:jemeel/Home/BottomNavPage.dart';
@@ -42,7 +44,7 @@ class _UserLoginState extends State<UserLogin> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("images/logo2.png", height: 300), // App logo
+                Image.asset("images/logo2.png", height: 250), // App logo
                 const SizedBox(height: 30),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,6 +175,17 @@ class _UserLoginState extends State<UserLogin> {
                     style: TextStyle(color: Crown.primraryColor),
                   ),
                 ),
+                TextButton(
+                  onPressed: () {
+                    Route route = MaterialPageRoute(
+                        builder: (_) => const RegisterDelivery());
+                    Navigator.push(context, route);
+                  },
+                  child: Text(
+                    "You are a driver ? Register here",
+                    style: TextStyle(color: Crown.primraryColor),
+                  ),
+                ),
               ],
             ),
           ),
@@ -251,7 +264,39 @@ class _UserLoginState extends State<UserLogin> {
       if (userType == "admin") {
         Route route = MaterialPageRoute(builder: (context) => AdminHomePage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);
-      } else if (userType == "user") {
+      } else if (userType == "driver") {
+        String status = results['status'];
+        switch (status) {
+          case "Pending":
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Contact Admin, Your account is not accepted',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 3),
+              ),
+            );
+            break;
+          case "Accepted":
+            Route route =
+                MaterialPageRoute(builder: (context) => DriverHomePage());
+            Navigator.pushAndRemoveUntil(context, route, (route) => false);
+            break;
+          default:
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Something wrong happend',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 3),
+              ),
+            );
+        }
+      } else {
         Route route =
             MaterialPageRoute(builder: (context) => const BottomNavPage());
         Navigator.pushAndRemoveUntil(context, route, (route) => false);

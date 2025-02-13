@@ -38,8 +38,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       DocumentSnapshot userDoc =
           await _firestore.collection("users").doc(userId).get();
       setState(() {
-        addresses = List<Map<String, dynamic>>.from(
-            userDoc['addresses'] ?? []); // Fetch all addresses
+        addresses = List<Map<String, dynamic>>.from(userDoc['addresses'] ?? []);
       });
     }
   }
@@ -76,7 +75,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       "productPrice": productData["price"] ?? 0,
       "selectedSize": selectedSize,
       "address": selectedAddress,
-      "deliveryPerson": "", // Initially empty
+      "deliveryPerson": "",
+      "deliveryPersonId": "",
+      "deliveryPhoneNumber": "",
       "paymentMethod": selectedPaymentMethod,
       "status": "Pending",
       "bookingDate": DateTime.now().toIso8601String(),
@@ -84,7 +85,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     };
 
     // Save booking to Firestore
-    await _firestore.collection("bookings").add(bookingData);
+    await _firestore.collection("orders").add(bookingData);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -101,7 +102,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     return Scaffold(
       backgroundColor: Crown.backgroundColor,
       appBar: AppBar(
-        title: const Text('Product Details'),
+        title: const Text(
+          'Product Details',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Crown.primraryColor,
         centerTitle: true,
       ),
@@ -258,8 +262,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             child: ListTile(
                               title: Text(address['name'] ?? "No Name"),
-                              subtitle: Text(
-                                  "${address['addressLine']}, ${address['city']} - ${address['zipCode']}"),
+                              subtitle: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${address['addressLine']}, ${address['city']} - ${address['zipCode']}",
+                                  ),
+                                  Text(
+                                    "${address['phoneNumber']}",
+                                  ),
+                                ],
+                              ),
                               trailing: Radio<Map<String, dynamic>>(
                                 value: address,
                                 groupValue: selectedAddress,
@@ -333,7 +347,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       ),
                     ),
                     child: const Text(
-                      'Book Now',
+                      'Order',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),

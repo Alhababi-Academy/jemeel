@@ -15,7 +15,7 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
   // Fetch all orders from Firestore
   Stream<QuerySnapshot> _fetchAllOrders() {
     return _firestore
-        .collection("bookings")
+        .collection("orders")
         .orderBy("timestamp", descending: true)
         .snapshots();
   }
@@ -25,6 +25,7 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
     QuerySnapshot snapshot = await _firestore
         .collection("users")
         .where("type", isEqualTo: "driver")
+        .where("status", isEqualTo: "Accepted")
         .get();
 
     return snapshot.docs.map((doc) {
@@ -39,7 +40,7 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
 
   // Update order status
   Future<void> _updateOrderStatus(String orderId, String newStatus) async {
-    await _firestore.collection("bookings").doc(orderId).update({
+    await _firestore.collection("orders").doc(orderId).update({
       "status": newStatus,
     });
     ScaffoldMessenger.of(context).showSnackBar(
@@ -49,10 +50,11 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
 
   // Assign a delivery person
   Future<void> _assignDeliveryPerson(String orderId, String deliveryPersonId,
-      String deliveryPersonName) async {
-    await _firestore.collection("bookings").doc(orderId).update({
+      String deliveryPersonName, String deliveryPhoneNumber) async {
+    await _firestore.collection("orders").doc(orderId).update({
       "deliveryPersonId": deliveryPersonId,
-      "deliveryPersonName": deliveryPersonName,
+      "deliveryPerson": deliveryPersonName,
+      "deliveryPhoneNumber": deliveryPhoneNumber,
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("Delivery person assigned: $deliveryPersonName.")),
@@ -64,6 +66,7 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
     List<Map<String, dynamic>> drivers = await _fetchDrivers();
     String? selectedDriverId;
     String? selectedDriverName;
+    String? deliveryPhoneNumber;
 
     showDialog(
       context: context,
@@ -81,6 +84,10 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
               selectedDriverId = value as String?;
               selectedDriverName = drivers
                   .firstWhere((driver) => driver["id"] == value)["fullName"];
+
+              deliveryPhoneNumber = drivers
+                  .firstWhere((driver) => driver["id"] == value)['phonenumber'];
+              print("phoneNumber $deliveryPhoneNumber");
             },
             decoration: const InputDecoration(
               labelText: "Select Driver",
@@ -95,8 +102,8 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
             ElevatedButton(
               onPressed: () {
                 if (selectedDriverId != null && selectedDriverName != null) {
-                  _assignDeliveryPerson(
-                      orderId, selectedDriverId!, selectedDriverName!);
+                  _assignDeliveryPerson(orderId, selectedDriverId!,
+                      selectedDriverName!, deliveryPhoneNumber!);
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -161,7 +168,12 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
     return Scaffold(
       backgroundColor: Crown.backgroundColor,
       appBar: AppBar(
-        title: const Text("Admin Orders"),
+        title: const Text(
+          "Admin Orders",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: Crown.primraryColor,
         centerTitle: true,
       ),
@@ -273,7 +285,14 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
 
                       // Delivery Person
                       Text(
-                        "Delivery Person: ${order['deliveryPersonName'] ?? "Not Assigned"}",
+                        "Delivery Person: ${order['deliveryPerson'] ?? "Not Assigned"}",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Crown.textSecondaryColor,
+                        ),
+                      ),
+                      Text(
+                        "Delivery Phone Number: ${order['deliveryPhoneNumber'] ?? "Not Assigned"}",
                         style: TextStyle(
                           fontSize: 14,
                           color: Crown.textSecondaryColor,
@@ -291,14 +310,22 @@ class _AdminOrdersPageState extends State<AdminOrdersPage> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Crown.buttonColor,
                             ),
-                            child: const Text("Change Status"),
+                            child: const Text(
+                              "Change Status",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                           ElevatedButton(
                             onPressed: () => _showAssignDeliveryDialog(orderId),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Crown.secondaryColor,
                             ),
-                            child: const Text("Assign Delivery"),
+                            child: const Text(
+                              "Assign Delivery",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ],
                       ),

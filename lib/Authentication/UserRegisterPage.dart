@@ -208,10 +208,10 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     }).catchError((error) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'Registration failed. Please try again.',
-            style: TextStyle(color: Colors.white),
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.red,
         ),
@@ -227,6 +227,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       "phonenumber": _phoneNumberTextEditingController.text.trim(),
       "address": _addressTextEditingController.text.trim(),
       "RegistredTime": DateTime.now(),
+      "status": "",
       "type": "user",
     }).then((value) {
       Navigator.pop(context);
