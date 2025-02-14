@@ -8,7 +8,7 @@ class ErrorAlertDialog extends StatelessWidget {
   final String message;
 
   // Constructor of the widget, requiring a message to be provided when it's used
-  const ErrorAlertDialog({required this.message});
+  const ErrorAlertDialog({super.key, required this.message});
 
   // Overriding the build method to describe the UI of the widget
   @override
@@ -22,7 +22,7 @@ class ErrorAlertDialog extends StatelessWidget {
       // A list of actions (buttons) that are placed at the bottom of the AlertDialog
       actions: <Widget>[
         // A container to hold the button, with its width set to the width of the screen
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           // An ElevatedButton widget for the user to interact with
           child: ElevatedButton(
@@ -35,7 +35,7 @@ class ErrorAlertDialog extends StatelessWidget {
               // The shape of the button, defined as a rounded rectangle
 
               // Background color of the button
-              backgroundColor: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(
                 const Color(0xffc8d2d3),
               ),
             ),
@@ -44,7 +44,7 @@ class ErrorAlertDialog extends StatelessWidget {
               "OK",
               style: TextStyle(
                 fontSize: 16, // Font size of the text
-                color: Jemeel.primraryColor, // Color of the text
+                color: Crown.primraryColor, // Color of the text
               ),
             ),
           ),

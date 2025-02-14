@@ -6,14 +6,14 @@ import 'package:jemeel/DialogBox/errorDialog.dart';
 import 'package:jemeel/DialogBox/loadingDialog.dart';
 import 'package:jemeel/config/config.dart';
 
-class UserRegisterPage extends StatefulWidget {
-  const UserRegisterPage({super.key});
+class RegisterDelivery extends StatefulWidget {
+  const RegisterDelivery({super.key});
 
   @override
-  _UserRegisterPageState createState() => _UserRegisterPageState();
+  _RegisterDeliveryState createState() => _RegisterDeliveryState();
 }
 
-class _UserRegisterPageState extends State<UserRegisterPage> {
+class _RegisterDeliveryState extends State<RegisterDelivery> {
   final TextEditingController _emailTextEditingController =
       TextEditingController();
   final TextEditingController _nameTextEditingController =
@@ -208,10 +208,10 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
     }).catchError((error) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
+            'Registration failed. Please try again.',
+            style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.red,
         ),
@@ -227,8 +227,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       "phonenumber": _phoneNumberTextEditingController.text.trim(),
       "address": _addressTextEditingController.text.trim(),
       "RegistredTime": DateTime.now(),
-      "status": "",
-      "type": "user",
+      "type": "driver",
+      "status": "Pending"
     }).then((value) {
       Navigator.pop(context);
       Navigator.pushReplacement(

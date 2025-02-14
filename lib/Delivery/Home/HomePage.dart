@@ -1,17 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jemeel/Admin/AdminChats.dart';
-import 'package:jemeel/Admin/Home/AllUsers.dart';
-import 'package:jemeel/Admin/Home/Clothes/RentalClothes/AllRentalClothesPage.dart';
-import 'package:jemeel/Admin/Home/Clothes/UploadClothes/AllClothes.dart';
-import 'package:jemeel/Admin/Home/Drivers/allDrivers.dart';
-import 'package:jemeel/Admin/Home/orders.dart';
+import 'package:jemeel/Delivery/Home/orders/OrdersListPage.dart';
+
 import 'package:jemeel/config/config.dart';
 import 'package:jemeel/widgets/StartPage.dart';
 
-class AdminHomePage extends StatelessWidget {
+class DriverHomePage extends StatelessWidget {
   String? title;
-  AdminHomePage({super.key, this.title});
+  DriverHomePage({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -33,67 +29,27 @@ class AdminHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildAdminCard(
-                title: "Upload Clothes For Sell",
-                icon: Icons.cloud_upload,
+              buildDriverCard(
+                title: "Assigned Orders",
+                icon: Icons.assignment,
                 onTap: () {
                   Route route =
-                      MaterialPageRoute(builder: (_) => const AllClothesPage());
+                      MaterialPageRoute(builder: (_) => const OrdersListPage());
                   Navigator.push(context, route);
                 },
               ),
               const SizedBox(height: 10),
-              buildAdminCard(
-                title: "Upload Clothes For Rent",
-                icon: Icons.cloud_upload,
+              buildDriverCard(
+                title: "Previous Orders",
+                icon: Icons.history,
                 onTap: () {
-                  Route route = MaterialPageRoute(
-                      builder: (_) => const AllRentalClothesPage());
-                  Navigator.push(context, route);
+                  // Route route = MaterialPageRoute(
+                  //     builder: (_) => const PreviousOrdersPage());
+                  // Navigator.push(context, route);
                 },
               ),
               const SizedBox(height: 10),
-              buildAdminCard(
-                title: "Orders",
-                icon: Icons.shopping_cart,
-                onTap: () {
-                  Route route = MaterialPageRoute(
-                      builder: (_) => const AdminOrdersPage());
-                  Navigator.push(context, route);
-                },
-              ),
-              const SizedBox(height: 10),
-              buildAdminCard(
-                title: "All Users",
-                icon: Icons.people,
-                onTap: () {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => const AllUsersPage());
-                  Navigator.push(context, route);
-                },
-              ),
-              const SizedBox(height: 10),
-              buildAdminCard(
-                title: "All Drivers",
-                icon: Icons.delivery_dining,
-                onTap: () {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => const AllDriversPage());
-                  Navigator.push(context, route);
-                },
-              ),
-              const SizedBox(height: 10),
-              buildAdminCard(
-                title: "Chat",
-                icon: Icons.chat,
-                onTap: () {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => const AdminChatsPage());
-                  Navigator.push(context, route);
-                },
-              ),
-              const SizedBox(height: 10),
-              buildAdminCard(
+              buildDriverCard(
                 title: "Logout",
                 icon: Icons.logout,
                 onTap: () async {
@@ -111,8 +67,8 @@ class AdminHomePage extends StatelessWidget {
     );
   }
 
-  // Reusable method to build the admin cards
-  Widget buildAdminCard({
+  // Reusable method to build the driver cards
+  Widget buildDriverCard({
     required String title,
     required IconData icon,
     required VoidCallback onTap,

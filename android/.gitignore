@@ -1,13 +1,50 @@
+# Gradle & Android related files
 gradle-wrapper.jar
-/.gradle
+/.gradle/
 /captures/
-/gradlew
-/gradlew.bat
+/.iso/
+/build/
 /local.properties
+
+# Flutter related files
+build/app/outputs/apk/debug/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
 GeneratedPluginRegistrant.java
 
-# Remember to never publicly share your keystore.
-# See https://flutter.dev/to/reference-keystore
-key.properties
-**/*.keystore
-**/*.jks
+
+# APK files
+*.apk
+*.aab
+
+# Build directories
+build/
+.dart_tool/
+.gradle/
+.idea/
+app/**/outputs/
+# Ignore all APK files
+build/app/outputs/**/*.apk
+build/app/intermediates/**/*.apk
+*.apk
+
+*.apk
+build/app/outputs/apk/
+build/app/outputs/flutter-apk/
+
+# Flutter-specific dependencies
+.pub-cache/
+.fvm/
+.fvm/flutter_sdk/
+
+# macOS
+.DS_Store
+
+# Android Studio/IntelliJ related files
+.idea/
+*.iml
+
+# Don't commit keystores or

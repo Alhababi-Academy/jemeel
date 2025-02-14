@@ -1,45 +1,80 @@
 {
   "project_info": {
-    "project_number": "758512692164",
-    "project_id": "jemeel-db2a3",
-    "storage_bucket": "jemeel-db2a3.appspot.com"
+    "project_number": "355048401623",
+    "firebase_url": "https://irrigation-d2944-default-rtdb.firebaseio.com",
+    "project_id": "irrigation-d2944",
+    "storage_bucket": "irrigation-d2944.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:758512692164:android:4ef022d4fb25164adfd291",
+        "mobilesdk_app_id": "1:355048401623:android:114df6d875dcc61a439e92",
         "android_client_info": {
-          "package_name": "com.example.jemeel"
+          "package_name": "com.example.irrigation"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "355048401623-1lim3ba1r0pgaqd6m0v15k7hlrvqrsb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0snHvH5ruEUNojnbaiOh4VOSMbd5lLP8"
+          "current_key": "AIzaSyBbye86MwPm0JJpDM0hNVixcF78wPuNBK0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355048401623-1lim3ba1r0pgaqd6m0v15k7hlrvqrsb4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355048401623-nd10jp3uba6ig10vumt8qv1kk7eokdkm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.irrigation"
+              }
+            }
+          ]
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:758512692164:android:a405fd887c8ffae9dfd291",
+        "mobilesdk_app_id": "1:355048401623:android:57d8acebfaf0ee2a439e92",
         "android_client_info": {
-          "package_name": "com.jemeel.app"
+          "package_name": "com.example.jemeel"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "355048401623-1lim3ba1r0pgaqd6m0v15k7hlrvqrsb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0snHvH5ruEUNojnbaiOh4VOSMbd5lLP8"
+          "current_key": "AIzaSyBbye86MwPm0JJpDM0hNVixcF78wPuNBK0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355048401623-1lim3ba1r0pgaqd6m0v15k7hlrvqrsb4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355048401623-nd10jp3uba6ig10vumt8qv1kk7eokdkm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.irrigation"
+              }
+            }
+          ]
         }
       }
     }

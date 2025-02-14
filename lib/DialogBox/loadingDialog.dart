@@ -8,7 +8,7 @@ class LoadingAlertDialog extends StatelessWidget {
   // A nullable String variable to hold the message that will be displayed in the dialog
   final String? message;
   // Constructor of the widget, allowing an optional message to be provided
-  const LoadingAlertDialog({this.message});
+  const LoadingAlertDialog({super.key, this.message});
 
   // Overriding the build method to describe the UI of the widget
   @override
@@ -29,7 +29,7 @@ class LoadingAlertDialog extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation(
-                Jemeel.primraryColor,
+                Crown.primraryColor,
               ),
             ),
           ),
