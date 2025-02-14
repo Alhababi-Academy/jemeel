@@ -15,6 +15,17 @@ build/app/outputs/apk/debug/
 .pub/
 GeneratedPluginRegistrant.java
 
+
+# APK files
+*.apk
+*.aab
+
+# Build directories
+build/
+.dart_tool/
+.gradle/
+.idea/
+app/**/outputs/
 # Ignore all APK files
 build/app/outputs/**/*.apk
 build/app/intermediates/**/*.apk
