@@ -16,7 +16,13 @@ build/app/outputs/apk/debug/
 GeneratedPluginRegistrant.java
 
 # Ignore all APK files
+build/app/outputs/**/*.apk
+build/app/intermediates/**/*.apk
 *.apk
+
+*.apk
+build/app/outputs/apk/
+build/app/outputs/flutter-apk/
 
 # Flutter-specific dependencies
 .pub-cache/
