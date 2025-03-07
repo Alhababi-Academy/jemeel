@@ -14,22 +14,42 @@ class ClothesForSellPage extends StatefulWidget {
 
 class _ClothesForSellPageState extends State<ClothesForSellPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final List<String> _sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  final List<String> _categories = [
+    'T-Shirts',
+    'Pants',
+    'Jackets',
+    'Dresses',
+    'Shoes',
+    'Accessories'
+  ];
 
-  // Stream to fetch clothes for sell from Firestore
+  List<String> selectedSizes = [];
+  List<String> selectedCategories = [];
+  double _ratings = 0;
+
+  // Modified stream to include filters
   Stream<QuerySnapshot> _fetchClothesForSell() {
-    return _firestore.collection("clothes").snapshots();
+    Query query = _firestore.collection("clothes");
+
+    // Apply size filter if any sizes are selected
+    if (selectedSizes.isNotEmpty) {
+      query = query.where("sizes", arrayContainsAny: selectedSizes);
+    }
+
+    // Apply category filter if any categories are selected
+    if (selectedCategories.isNotEmpty) {
+      query = query.where("category", whereIn: selectedCategories);
+    }
+
+    return query.snapshots();
   }
 
-  // Placeholder function for handling the "Buy" action
   void _handleBuy(String productId) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("Buying product with ID: $productId")),
     );
   }
-
-  final List<dynamic> _sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  List<dynamic> selectedSizes = []; // List to store selected sizes
-  double _ratings = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +59,14 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
         title: const Text('Clothes for Sell'),
         centerTitle: true,
         backgroundColor: Crown.primraryColor,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list),
+            onPressed: () {
+              _showFilterDrawer(context);
+            },
+          ),
+        ],
       ),
       drawer: const UserDrawer(),
       body: StreamBuilder<QuerySnapshot>(
@@ -54,7 +82,6 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
             return const Center(child: Text("No clothes available for sell"));
           }
 
-          // Display each product in a list view
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: snapshot.data!.docs.map((doc) {
@@ -67,7 +94,123 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
     );
   }
 
-  // Widget to build each product card
+  // Filter drawer
+  void _showFilterDrawer(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16.0),
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Filter Clothes',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Crown.primraryColor,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Sizes',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Crown.textColor,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8.0,
+              children: _sizes
+                  .map((size) => ChoiceChip(
+                        label: Text(size),
+                        selected: selectedSizes.contains(size),
+                        onSelected: (selected) {
+                          setState(() {
+                            if (selected) {
+                              selectedSizes.add(size);
+                            } else {
+                              selectedSizes.remove(size);
+                            }
+                          });
+                          Navigator.pop(
+                              context); // Close drawer after selection
+                        },
+                        selectedColor: Crown.primraryColor,
+                        backgroundColor: Colors.grey.shade200,
+                        labelStyle: TextStyle(
+                          color: selectedSizes.contains(size)
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Categories',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Crown.textColor,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8.0,
+              children: _categories
+                  .map((category) => ChoiceChip(
+                        label: Text(category),
+                        selected: selectedCategories.contains(category),
+                        onSelected: (selected) {
+                          setState(() {
+                            if (selected) {
+                              selectedCategories.add(category);
+                            } else {
+                              selectedCategories.remove(category);
+                            }
+                          });
+                          Navigator.pop(
+                              context); // Close drawer after selection
+                        },
+                        selectedColor: Crown.primraryColor,
+                        backgroundColor: Colors.grey.shade200,
+                        labelStyle: TextStyle(
+                          color: selectedCategories.contains(category)
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  selectedSizes.clear();
+                  selectedCategories.clear();
+                });
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text(
+                'Clear Filters',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildProductCard(Map<String, dynamic> productData, String productId) {
     return GestureDetector(
       onTap: () {
@@ -89,7 +232,6 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Product image
               productData['images'] != null && productData['images'].isNotEmpty
                   ? Image.network(
                       productData['images'][0],
@@ -102,8 +244,6 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
                     )
                   : const Icon(Icons.image, size: 150, color: Colors.grey),
               const SizedBox(height: 10),
-
-              // Product name
               Text(
                 productData['name'] ?? 'No name',
                 style: TextStyle(
@@ -113,15 +253,11 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
                 ),
               ),
               const SizedBox(height: 5),
-
-              // Product price
               Text(
                 '\$${productData['price']?.toStringAsFixed(2) ?? 'N/A'}',
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 5),
-
-              // Product details
               Text(
                 productData['details'] ?? 'No details available',
                 style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
@@ -150,8 +286,6 @@ class _ClothesForSellPageState extends State<ClothesForSellPage> {
                 starColor: Colors.yellow,
                 angle: 12,
               ),
-
-              // Buy button
             ],
           ),
         ),

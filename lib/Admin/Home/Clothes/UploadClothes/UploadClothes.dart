@@ -24,6 +24,17 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
   List<String> selectedSizes = [];
   bool isUploading = false;
 
+  // Added categories
+  final List<String> _categories = [
+    'T-Shirts',
+    'Pants',
+    'Jackets',
+    'Dresses',
+    'Shoes',
+    'Accessories'
+  ];
+  String? selectedCategory;
+
   Future<void> _pickImages() async {
     try {
       final pickedFiles = await _picker.pickMultiImage();
@@ -59,9 +70,12 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
         _priceController.text.isEmpty ||
         _imageFiles == null ||
         _imageFiles!.isEmpty ||
-        selectedSizes.isEmpty) {
+        selectedSizes.isEmpty ||
+        selectedCategory == null) {
+      // Added category check
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Please complete all required fields and select images."),
+        content: Text(
+            "Please complete all required fields, select images and category."),
         backgroundColor: Colors.red,
       ));
       return;
@@ -79,6 +93,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
         "details": _detailsController.text.trim(),
         "images": imageUrls,
         "sizes": selectedSizes,
+        "category": selectedCategory, // Added category to database
         "uploadTime": DateFormat('MMMM d, yyyy h:mm a').format(DateTime.now()),
       });
 
@@ -106,6 +121,7 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
     _detailsController.clear();
     _imageFiles = [];
     selectedSizes = [];
+    selectedCategory = null; // Added category reset
   }
 
   @override
@@ -125,6 +141,8 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildImageSection(),
+              const SizedBox(height: 20),
+              _buildCategoryDropdown(), // Added category dropdown
               const SizedBox(height: 20),
               _buildSizeChips(),
               _buildFormFields(),
@@ -195,6 +213,54 @@ class _UploadClothesPageState extends State<UploadClothesPage> {
                 ),
               )
             : Text("No images selected.", style: _hintTextStyle()),
+      ],
+    );
+  }
+
+  // Added category dropdown widget
+  Widget _buildCategoryDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Category", style: _sectionTitleStyle()),
+        const SizedBox(height: 10),
+        DropdownButtonFormField<String>(
+          value: selectedCategory,
+          hint: Text("Select a category", style: _hintTextStyle()),
+          items: _categories.map((String category) {
+            return DropdownMenuItem<String>(
+              value: category,
+              child: Text(
+                category,
+                style: TextStyle(
+                  color: Colors.black, // Text color for dropdown items
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedCategory = newValue;
+            });
+          },
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.category, color: Crown.primraryColor),
+            focusedBorder: _inputBorder(Crown.primraryColor),
+            enabledBorder: _inputBorder(Crown.textColor.withOpacity(0.5)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            filled: true, // Enable background color
+            fillColor:
+                Colors.grey.shade100, // Background color when not focused
+          ),
+          dropdownColor: Colors.grey, // Background color of dropdown menu
+          style: TextStyle(
+            color: Crown.primraryColor, // Text color of selected item
+          ),
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: Crown.primraryColor, // Dropdown arrow color
+          ),
+        ),
       ],
     );
   }
